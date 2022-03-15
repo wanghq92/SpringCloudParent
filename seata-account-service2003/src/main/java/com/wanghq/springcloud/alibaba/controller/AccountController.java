@@ -1,0 +1,32 @@
+package com.wanghq.springcloud.alibaba.controller;
+
+import com.wanghq.springcloud.alibaba.domain.CommonResult;
+import com.wanghq.springcloud.alibaba.service.AccountService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+
+/**
+ * @author whq
+ * @version 1.0.0
+ * @Description TODO
+ * @createTime 2022-01-17 23:30
+ */
+@RestController
+public class AccountController {
+
+    @Resource
+    AccountService accountService;
+
+    /**
+     * 扣减账户余额
+     */
+    @RequestMapping("/account/decrease")
+    public CommonResult decrease(@RequestParam("userId") Long userId, @RequestParam("money") BigDecimal money){
+        accountService.decrease(userId,money);
+        return new CommonResult(200,"扣减账户余额成功！");
+    }
+}
